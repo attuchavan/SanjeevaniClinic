@@ -100,3 +100,4 @@ router.patch('/visit/:id/status', (req, res, next) => {
 });
 
 module.exports = router;
+

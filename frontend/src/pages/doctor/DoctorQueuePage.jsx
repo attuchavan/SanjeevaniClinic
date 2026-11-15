@@ -239,13 +239,21 @@ export default function DoctorQueuePage() {
 
             {/* Consultation Action Buttons */}
             <div className="flex items-center space-x-2 flex-wrap">
+              <Link
+                to={`/doctor/consultation?visitId=${currentPatient.id}`}
+                className="px-4 py-2.5 bg-teal-400 hover:bg-teal-300 text-slate-950 text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-1.5"
+              >
+                <Stethoscope className="w-4 h-4" />
+                <span>Open Consultation & Rx</span>
+              </Link>
+
               {currentPatient.status === 'CALLED' && (
                 <button
                   onClick={() => handleStatusChange(currentPatient.id, 'IN_PROGRESS')}
-                  className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl transition-all shadow-md shadow-emerald-950/20 flex items-center gap-1.5"
+                  className="px-3.5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-bold rounded-xl transition-all shadow-md flex items-center gap-1.5"
                 >
-                  <Stethoscope className="w-4 h-4" />
-                  <span>Start Consultation</span>
+                  <UserCheck className="w-4 h-4" />
+                  <span>Mark In-Progress</span>
                 </button>
               )}
 
@@ -363,17 +371,24 @@ export default function DoctorQueuePage() {
                     </td>
 
                     {/* Actions */}
-                    <td className="py-3.5 px-4 sm:px-6 text-right space-x-2">
+                    <td className="py-3.5 px-4 sm:px-6 text-right space-x-1.5 whitespace-nowrap">
+                      <Link
+                        to={`/doctor/consultation?visitId=${v.id}`}
+                        className="px-2.5 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-semibold rounded-lg border border-teal-200 inline-flex items-center gap-1"
+                      >
+                        <Stethoscope className="w-3.5 h-3.5" />
+                        <span>Consult</span>
+                      </Link>
                       <button
                         onClick={() => handleStatusChange(v.id, 'CALLED')}
-                        className="px-3 py-1.5 bg-[#102a43] hover:bg-[#1d3557] text-white text-xs font-semibold rounded-lg transition-colors"
+                        className="px-2.5 py-1.5 bg-[#102a43] hover:bg-[#1d3557] text-white text-xs font-semibold rounded-lg transition-colors"
                       >
                         Call
                       </button>
                       <button
                         onClick={() => handleStatusChange(v.id, 'CANCELLED')}
                         title="Cancel Token"
-                        className="p-1.5 text-slate-400 hover:text-rose-600 transition-colors"
+                        className="p-1.5 text-slate-400 hover:text-rose-600 transition-colors inline-block"
                       >
                         <XCircle className="w-4 h-4" />
                       </button>
@@ -419,3 +434,4 @@ export default function DoctorQueuePage() {
     </div>
   );
 }
+

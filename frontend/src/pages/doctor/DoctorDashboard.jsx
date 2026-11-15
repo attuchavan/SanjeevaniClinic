@@ -150,18 +150,27 @@ export default function DoctorDashboard() {
           </div>
 
           {currentPatient ? (
-            <div className="p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
+            <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold text-sky-950">{currentPatient.full_name}</span>
-                <span className="text-xs font-mono text-sky-700 ml-2">({currentPatient.uhid})</span>
+                <span className="text-xs font-bold text-teal-950">{currentPatient.full_name}</span>
+                <span className="text-xs font-mono text-teal-700 ml-2">({currentPatient.uhid})</span>
                 <p className="text-[11px] text-slate-500 mt-0.5">Token #{currentPatient.token_number} &bull; {currentPatient.status}</p>
               </div>
-              <Link
-                to="/doctor/queue"
-                className="px-3 py-1.5 bg-[#102a43] text-white text-xs font-bold rounded-lg"
-              >
-                Go to Queue
-              </Link>
+              <div className="flex items-center space-x-2">
+                <Link
+                  to={`/doctor/consultation?visitId=${currentPatient.id}`}
+                  className="px-3 py-1.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold rounded-lg flex items-center gap-1 shadow-sm transition"
+                >
+                  <Stethoscope className="w-3.5 h-3.5" />
+                  <span>Consult Now</span>
+                </Link>
+                <Link
+                  to="/doctor/queue"
+                  className="px-3 py-1.5 bg-slate-200 text-slate-800 text-xs font-bold rounded-lg hover:bg-slate-300 transition"
+                >
+                  Queue
+                </Link>
+              </div>
             </div>
           ) : nextPatient ? (
             <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between">

@@ -15,3 +15,4 @@ const bookAppointmentSchema = z.object({
 module.exports = {
   bookAppointmentSchema,
 };
+

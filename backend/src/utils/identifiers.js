@@ -81,3 +81,4 @@ module.exports = {
   generateNextAppointmentNumber,
   getNextDailyToken,
 };
+

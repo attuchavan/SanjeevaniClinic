@@ -24,6 +24,10 @@ import DoctorQueuePage from './pages/doctor/DoctorQueuePage';
 import ReceptionistQueuePage from './pages/receptionist/ReceptionistQueuePage';
 import AppointmentsPage from './pages/receptionist/AppointmentsPage';
 
+// Phase 5 Modules: Consultation & Prescriptions
+import DoctorConsultationPage from './pages/doctor/DoctorConsultationPage';
+import PrescriptionsArchivePage from './pages/doctor/PrescriptionsArchivePage';
+
 // Root Redirector based on authenticated role
 function RootRedirect() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -79,44 +83,10 @@ export default function App() {
             <Route path="patients/:id" element={<PatientProfile />} />
 
             {/* Phase 5: Consultation */}
-            <Route
-              path="consultation"
-              element={
-                <PhasePlaceholder
-                  title="Doctor Consultation & Case Paper"
-                  phase="Phase 5 Module"
-                  description="Electronic Case Paper for New and Old patients: chief complaints, medical history, vitals, clinical examination, diagnosis, and treatment advice."
-                  features={[
-                    'New patient clinical assessment',
-                    'Old patient previous history reference',
-                    'Clinical vitals recording',
-                    'Diagnosis & doctor advice notes',
-                  ]}
-                  returnPath="/doctor"
-                  returnLabel="Back to Doctor Dashboard"
-                />
-              }
-            />
+            <Route path="consultation" element={<DoctorConsultationPage />} />
 
             {/* Phase 5: Prescriptions */}
-            <Route
-              path="prescriptions"
-              element={
-                <PhasePlaceholder
-                  title="Prescription Generator & PDF Printing"
-                  phase="Phase 5 Module"
-                  description="Digital prescription generation with medicine dosages, frequency (1-0-1), duration, instructions, and professional branded PDF printing."
-                  features={[
-                    'Structured medicine dosages and timing',
-                    'Doctor instructions and advice',
-                    'Finalized tamper-proof locking',
-                    'Professional clinic print format',
-                  ]}
-                  returnPath="/doctor"
-                  returnLabel="Back to Doctor Dashboard"
-                />
-              }
-            />
+            <Route path="prescriptions" element={<PrescriptionsArchivePage />} />
 
             <Route path="diagnostics" element={<DiagnosticsView />} />
           </Route>
