@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import queueService from '../../services/queueService';
 import patientService from '../../services/patientService';
 import socket from '../../services/socket';
+import billingService from '../../services/billingService';
+import PaymentModal from '../../components/billing/PaymentModal';
+import PrintableReceiptModal from '../../components/billing/PrintableReceiptModal';
 import { 
   Clock, 
   UserPlus, 
@@ -14,7 +17,8 @@ import {
   RefreshCw, 
   Radio, 
   XCircle,
-  Building2
+  Building2,
+  Receipt
 } from 'lucide-react';
 
 export default function ReceptionistQueuePage() {
@@ -32,6 +36,12 @@ export default function ReceptionistQueuePage() {
   const [issuingToken, setIssuingToken] = useState(false);
   const [modalError, setModalError] = useState('');
   const [issuedNotice, setIssuedNotice] = useState('');
+
+  // Payment state
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [selectedPaymentVisit, setSelectedPaymentVisit] = useState(null);
+  const [receiptModalOpen, setReceiptModalOpen] = useState(false);
+  const [selectedReceipt, setSelectedReceipt] = useState(null);
 
   const loadQueue = async () => {
     try {
@@ -326,7 +336,25 @@ export default function ReceptionistQueuePage() {
                     </td>
 
                     {/* Actions */}
-                    <td className="py-3.5 px-4 sm:px-6 text-right">
+                    <td className="py-3.5 px-4 sm:px-6 text-right space-x-2 whitespace-nowrap">
+                      <button
+                        onClick={() => {
+                          setSelectedPaymentVisit({
+                            id: v.id,
+                            patientId: v.patient_id,
+                            patientName: v.full_name,
+                            uhid: v.uhid,
+                            tokenNumber: v.token_number,
+                            visitNumber: v.visit_number,
+                            visitType: v.visit_type,
+                          });
+                          setPaymentModalOpen(true);
+                        }}
+                        className="text-xs bg-teal-50 hover:bg-teal-100 text-teal-800 font-semibold px-2.5 py-1.5 rounded-lg border border-teal-200 inline-flex items-center gap-1 transition"
+                      >
+                        <Receipt className="w-3.5 h-3.5" />
+                        <span>Collect Fee</span>
+                      </button>
                       <button
                         onClick={() => handleCancelVisit(v.id)}
                         className="text-xs text-rose-600 hover:text-rose-800 font-semibold inline-flex items-center gap-1"
@@ -503,6 +531,31 @@ export default function ReceptionistQueuePage() {
           </div>
         </div>
       )}
+
+      {/* Payment Entry Modal */}
+      <PaymentModal
+        isOpen={paymentModalOpen}
+        onClose={() => setPaymentModalOpen(false)}
+        visit={selectedPaymentVisit}
+        onSuccess={async (createdPayment) => {
+          setPaymentModalOpen(false);
+          await loadQueue();
+          try {
+            const printData = await billingService.getPrintableReceipt(createdPayment.id);
+            setSelectedReceipt(printData.data);
+            setReceiptModalOpen(true);
+          } catch (e) {
+            // fallback
+          }
+        }}
+      />
+
+      {/* Printable Receipt Modal */}
+      <PrintableReceiptModal
+        isOpen={receiptModalOpen}
+        onClose={() => setReceiptModalOpen(false)}
+        data={selectedReceipt}
+      />
     </div>
   );
 }

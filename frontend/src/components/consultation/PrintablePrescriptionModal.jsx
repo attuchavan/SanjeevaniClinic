@@ -267,3 +267,4 @@ export default function PrintablePrescriptionModal({ isOpen, onClose, data }) {
     </div>
   );
 }
+

@@ -276,3 +276,4 @@ export default function PrintableCasePaperModal({ isOpen, onClose, data }) {
     </div>
   );
 }
+

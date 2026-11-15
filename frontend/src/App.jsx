@@ -28,6 +28,9 @@ import AppointmentsPage from './pages/receptionist/AppointmentsPage';
 import DoctorConsultationPage from './pages/doctor/DoctorConsultationPage';
 import PrescriptionsArchivePage from './pages/doctor/PrescriptionsArchivePage';
 
+// Phase 6 Module: Billing & Payment Collections
+import BillingPage from './pages/receptionist/BillingPage';
+
 // Root Redirector based on authenticated role
 function RootRedirect() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -111,25 +114,8 @@ export default function App() {
             <Route path="patients" element={<PatientDirectory />} />
             <Route path="patients/:id" element={<PatientProfile />} />
 
-            {/* Phase 6: Billing */}
-            <Route
-              path="billing"
-              element={
-                <PhasePlaceholder
-                  title="Billing & Payment Collections"
-                  phase="Phase 6 Module"
-                  description="Record consultation fees via Cash or UPI, issue payment receipts, track daily and monthly collections, and manage pending fees."
-                  features={[
-                    'Consultation fee recording',
-                    'Cash and UPI payment modes',
-                    'Unique receipt numbering',
-                    'Daily cash collection reconciliation',
-                  ]}
-                  returnPath="/receptionist"
-                  returnLabel="Back to Reception Dashboard"
-                />
-              }
-            />
+            {/* Phase 6: Billing & Collections */}
+            <Route path="billing" element={<BillingPage />} />
 
             <Route path="diagnostics" element={<DiagnosticsView />} />
           </Route>

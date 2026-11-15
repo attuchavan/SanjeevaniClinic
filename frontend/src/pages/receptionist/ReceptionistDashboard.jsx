@@ -176,6 +176,23 @@ export default function ReceptionistDashboard() {
                 <ArrowRight className="w-3 h-3" />
               </span>
             </Link>
+
+            <Link
+              to="/receptionist/billing"
+              className="p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50/40 transition-all text-left flex flex-col justify-between group sm:col-span-2"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="block text-xs font-bold text-slate-800">Billing & Collections</span>
+                  <span className="block text-[11px] text-slate-500 mt-0.5">Collect consultation fees & issue receipts</span>
+                </div>
+                <CreditCard className="w-5 h-5 text-teal-600 group-hover:scale-110 transition-transform" />
+              </div>
+              <span className="text-[11px] font-semibold text-teal-700 mt-2 inline-flex items-center gap-1">
+                <span>Open Cash & UPI Desk</span>
+                <ArrowRight className="w-3 h-3" />
+              </span>
+            </Link>
           </div>
         </div>
 

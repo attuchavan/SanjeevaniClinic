@@ -76,9 +76,39 @@ function getNextDailyToken(dateStr) {
   return nextToken;
 }
 
+/**
+ * Generate sequential Payment Receipt Number
+ * Format: REC-YYYY-XXXX (e.g. REC-2026-0001)
+ */
+function generateNextReceiptNumber() {
+  const db = getDatabase();
+  const currentYear = new Date().getFullYear();
+  const prefix = `REC-${currentYear}-`;
+
+  const lastReceipt = db
+    .prepare(
+      `SELECT receipt_number FROM payments 
+       WHERE receipt_number LIKE ? 
+       ORDER BY id DESC LIMIT 1`
+    )
+    .get(`${prefix}%`);
+
+  let nextSequence = 1;
+  if (lastReceipt && lastReceipt.receipt_number) {
+    const parts = lastReceipt.receipt_number.split('-');
+    if (parts.length === 3) {
+      const seq = parseInt(parts[2], 10);
+      if (!isNaN(seq)) nextSequence = seq + 1;
+    }
+  }
+
+  return `${prefix}${String(nextSequence).padStart(4, '0')}`;
+}
+
 module.exports = {
   generateNextVisitNumber,
   generateNextAppointmentNumber,
   getNextDailyToken,
+  generateNextReceiptNumber,
 };
 
