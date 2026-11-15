@@ -19,6 +19,11 @@ import NewPatientRegistration from './pages/receptionist/NewPatientRegistration'
 import PatientDirectory from './pages/common/PatientDirectory';
 import PatientProfile from './pages/common/PatientProfile';
 
+// Phase 4 Modules: Live Queue & Appointments
+import DoctorQueuePage from './pages/doctor/DoctorQueuePage';
+import ReceptionistQueuePage from './pages/receptionist/ReceptionistQueuePage';
+import AppointmentsPage from './pages/receptionist/AppointmentsPage';
+
 // Root Redirector based on authenticated role
 function RootRedirect() {
   const { user, isAuthenticated, loading } = useAuth();
@@ -66,29 +71,12 @@ export default function App() {
           >
             <Route index element={<DoctorDashboard />} />
             
+            {/* Phase 4: Doctor Live Queue */}
+            <Route path="queue" element={<DoctorQueuePage />} />
+
             {/* Phase 3: Patient Directory & Profile */}
             <Route path="patients" element={<PatientDirectory />} />
             <Route path="patients/:id" element={<PatientProfile />} />
-
-            {/* Phase 4: Queue */}
-            <Route
-              path="queue"
-              element={
-                <PhasePlaceholder
-                  title="Live Patient Queue & Calling"
-                  phase="Phase 4 Module"
-                  description="Real-time patient queue synchronized between Receptionist and Doctor computers via Socket.IO. Enables calling next patient, emergency priority toggles, and consultation timer."
-                  features={[
-                    'Real-time Socket.IO Queue Feed',
-                    'One-click "Call Next Patient"',
-                    'Emergency triage priority',
-                    'Waiting time counter',
-                  ]}
-                  returnPath="/doctor"
-                  returnLabel="Back to Doctor Dashboard"
-                />
-              }
-            />
 
             {/* Phase 5: Consultation */}
             <Route
@@ -144,50 +132,14 @@ export default function App() {
           >
             <Route index element={<ReceptionistDashboard />} />
 
+            {/* Phase 4: Receptionist Queue & Appointments */}
+            <Route path="queue" element={<ReceptionistQueuePage />} />
+            <Route path="appointments" element={<AppointmentsPage />} />
+
             {/* Phase 3: Patient Management */}
             <Route path="patients/new" element={<NewPatientRegistration />} />
             <Route path="patients" element={<PatientDirectory />} />
             <Route path="patients/:id" element={<PatientProfile />} />
-
-            {/* Phase 4: Queue */}
-            <Route
-              path="queue"
-              element={
-                <PhasePlaceholder
-                  title="Front Desk Queue Monitor"
-                  phase="Phase 4 Module"
-                  description="Live queue monitor showing patients waiting, currently in consultation with Dr. Sharad Motugade, and completed visits."
-                  features={[
-                    'Real-time token status updates',
-                    'Emergency priority tagging',
-                    'Check-in and visit token dispatch',
-                    'Doctor consultation status sync',
-                  ]}
-                  returnPath="/receptionist"
-                  returnLabel="Back to Reception Dashboard"
-                />
-              }
-            />
-
-            {/* Phase 4: Appointments */}
-            <Route
-              path="appointments"
-              element={
-                <PhasePlaceholder
-                  title="Appointment Management"
-                  phase="Phase 4 Module"
-                  description="Book advance appointments, manage slots, view daily calendar, and convert scheduled appointments into active visits upon arrival."
-                  features={[
-                    'Advance slot booking',
-                    'One-click appointment-to-visit check-in',
-                    'Duplicate visit prevention',
-                    'Daily schedule view',
-                  ]}
-                  returnPath="/receptionist"
-                  returnLabel="Back to Reception Dashboard"
-                />
-              }
-            />
 
             {/* Phase 6: Billing */}
             <Route

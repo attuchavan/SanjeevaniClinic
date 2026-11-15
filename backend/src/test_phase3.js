@@ -226,3 +226,4 @@ testPhase3()
     console.error('❌ Phase 3 Test Failed:', err);
     process.exit(1);
   });
+

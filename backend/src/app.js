@@ -9,6 +9,8 @@ const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 const healthRoutes = require('./routes/health.routes');
 const authRoutes = require('./routes/auth.routes');
 const patientRoutes = require('./routes/patient.routes');
+const queueRoutes = require('./routes/queue.routes');
+const appointmentRoutes = require('./routes/appointment.routes');
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.use(requestLogger);
 app.use('/api', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
+app.use('/api/queue', queueRoutes);
+app.use('/api/appointments', appointmentRoutes);
 
 // Optional: Serve frontend static files if built in production
 const frontendDist = path.resolve(__dirname, '../../frontend/dist');
