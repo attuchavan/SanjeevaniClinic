@@ -1,0 +1,22 @@
+{
+  "name": "sanjeevani-clinic-management-system",
+  "version": "1.0.0",
+  "description": "Offline-First Local Clinic Management System for Sanjeevani Clinic - Dr. Sharad Motugade",
+  "private": true,
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "migrate": "cd backend && npm run migrate",
+    "seed": "cd backend && npm run seed",
+    "test:phase1": "cd backend && node src/test_phase1.js",
+    "test:phase2": "cd backend && node src/test_phase2.js",
+    "test:phase3": "cd backend && node src/test_phase3.js",
+    "test:all": "cd backend && node src/test_phase1.js && node src/test_phase2.js && node src/test_phase3.js",
+    "start": "cd backend && npm start"
+  },
+  "keywords": ["clinic-management", "offline-first", "sqlite", "react", "nodejs"],
+  "author": "Dr. Sharad Motugade - Sanjeevani Clinic",
+  "license": "UNLICENSED"
+}

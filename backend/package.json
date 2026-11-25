@@ -1,0 +1,36 @@
+{
+  "name": "sharad-clinic-backend",
+  "version": "1.0.0",
+  "description": "Backend API and Real-Time Server for Dr. Sharad Motugade Clinic Management System",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "node src/database/migrate.js",
+    "seed": "node src/database/seed.js"
+  },
+  "keywords": [
+    "clinic",
+    "sqlite",
+    "offline-first",
+    "lan",
+    "medical"
+  ],
+  "author": "Dr. Sharad Motugade Clinic",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^13.2.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "socket.io": "^4.8.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "socket.io-client": "^4.8.4"
+  }
+}
